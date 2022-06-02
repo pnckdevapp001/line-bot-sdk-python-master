@@ -27,11 +27,11 @@ import http.client
 from pornhub_api import PornhubApi
 api = PornhubApi()
 api.stars.all()
-#from pyngrok import ngrok
+from pyngrok import ngrok
 
-#ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
+ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
 
-#ngrok.connect(5000)
+ngrok.connect(5000)
 
 from argparse import ArgumentParser
 
