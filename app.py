@@ -765,7 +765,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, messages)
     else:
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text))
+            event.reply_token, TextSendMessage(text="คำสั่งไม่ถูกต้อง\nดูหนังAV พิมพ์ avfreex24.com \nหรือดูคลิปหลุด\nพิมพ์ clipthai \nแนะนำให้จิ้มผ่าน เมนูสะดวกกว่า\nดูฟรี ไม่มีโฆษณา"))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
