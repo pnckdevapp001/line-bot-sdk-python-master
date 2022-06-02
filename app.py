@@ -27,6 +27,11 @@ import http.client
 from pornhub_api import PornhubApi
 api = PornhubApi()
 api.stars.all()
+from pyngrok import ngrok
+
+ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
+
+ngrok.connect(5000)
 
 from argparse import ArgumentParser
 
@@ -901,11 +906,11 @@ if __name__ == "__main__":
     arg_parser = ArgumentParser(
         usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
     )
-    arg_parser.add_argument('-p', '--port', type=int, default=8000, help='port')
+    arg_parser.add_argument('-p', '--port', type=int, default=5000, help='port')
     arg_parser.add_argument('-d', '--debug', default=False, help='debug')
     options = arg_parser.parse_args()
 
     # create tmp dir for download content
     make_static_tmp_dir()
 
-    app.run(debug=options.debug, port=options.port)
+    app.run(debug=options.debug, port=5000)
