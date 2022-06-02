@@ -24,14 +24,15 @@ import requests
 import random
 from googletrans import Translator
 import http.client
+from bs4 import BeautifulSoup
 from pornhub_api import PornhubApi
 api = PornhubApi()
 api.stars.all()
-from pyngrok import ngrok
+#from pyngrok import ngrok
 
-ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
+#ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
 
-ngrok.connect(5000)
+#ngrok.connect(5000)
 
 from argparse import ArgumentParser
 
@@ -294,6 +295,74 @@ def handle_text_message(event):
             ]
         )
 
+    elif text.lower().startswith('sp='):
+        msgTU = text.lower().split('sp=')[1]
+        if msgTU == "":
+            return line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text='ไม่พบ ข้อความที่จะค้นหาหนัง'),
+                #TextSendMessage(text='value: ' + str(quota.value)),
+            ]
+        )
+        
+        limit = int(10)
+        #https://spankbang.com/s/model+media/?p=m
+        r = requests.get(f"https://spankbang.com/s/{msgTU}?p=m").text
+        soup = BeautifulSoup(r, 'lxml')
+        seedata = []
+        for item in soup.find_all('div', class_='video-item')[0:limit]:
+            try:
+                full_video = item.find("a", class_='thumb')['href']
+            except:
+                print(f'No videos found for: {msgTU}')
+            if "/category/" in full_video:
+                continue
+            title = full_video.split('/')[3].replace('+', ' ')
+            vvid = full_video.split("/")[1]
+            prev = item.picture.img
+            try:
+                prev_vid = prev['data-preview']
+                image = prev['data-src']
+            except:
+                prev_vid = "Not Found"
+                image = "Not Found"
+            seedata.append({
+                "SPTitle": title,
+                "PreviewVideo": prev_vid,
+                "Thumbnail": image,
+                "urlPP": "https://pnck-ytdl.herokuapp.com/api/info?url=https://spankbang.com/"+vvid+"/embed/"
+            })
+            
+        SExsa = random.choice(seedata)
+        urlsp = requests.get(SExsa['urlPP'])
+        text = urlsp.text
+        datapX = json.loads(text)
+        playMP4 = []
+        for mp4play in datapX['info']['formats']:
+            if mp4play['url'].startswith("https://vdownload"):
+                playMP4.append(mp4play['url'])
+                
+        #print(playMP4[-1],SExsa['SPTitle'],SExsa['PreviewVideo'],SExsa['Thumbnail'])
+        if playMP4[-1] != "":
+            line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text='ผลการค้นหาจากSpankbang\nวีดีโอMP4 Title:\n'+SExsa['SPTitle']),
+                #TextSendMessage(text='value: ' + str(quota.value)),
+                VideoSendMessage(
+                    original_content_url=playMP4[-1],
+                    preview_image_url=SExsa['Thumbnail']
+                )
+            ]
+        )
+        else:
+            print("NOVID")
+            line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text='ไม่พบ หนังเย็ดกันครับ'),
+                #TextSendMessage(text='value: ' + str(quota.value)),
+            ]
+        )
+
     elif text.lower().startswith('ph='):
         msgTU = text.lower().split('ph=')[1]
         if msgTU == "":
@@ -348,7 +417,6 @@ def handle_text_message(event):
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
-
 
     elif text == 'Xmsquota':
         quota = line_bot_api.get_message_quota()
@@ -821,6 +889,10 @@ def handle_text_message(event):
     ** ค้นหาจาก pornhub
     พิมพ์ ph=ตามด้วยข้อความ
     ตัวอย่าง ph=เสียงไทย
+    -------------------------------
+    ** ค้นหาจาก spankbang
+    พิมพ์ sp=ตามด้วยข้อความ
+    ตัวอย่าง sp=modelmedia
     -------------------------------
     ** ดาวน์โหลดวีดีโอจาก TikTok ไมมีลายน้ำ ด้วยID
     พิมพ์ lox=IDวีดีโอ
