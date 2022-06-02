@@ -27,11 +27,11 @@ import http.client
 from pornhub_api import PornhubApi
 api = PornhubApi()
 api.stars.all()
-from pyngrok import ngrok
+#from pyngrok import ngrok
 
-ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
+#ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
 
-ngrok.connect(5000)
+#ngrok.connect(5000)
 
 from argparse import ArgumentParser
 
@@ -246,7 +246,7 @@ def handle_text_message(event):
             ]
         )
 
-    elif re.search(r'กำลังไปเอาหนังมาให้ดูใจเย็นๆ', text.lower()):
+    elif re.search(r'กำลังไปเอาหนังมาให้ดูใจเย็นๆ', text.lower()) or re.search(r'movieav\.net', text.lower()):
         #label = "JAV"
         data = api.search.search("model+media", period="weekly")
         pornlist = []
@@ -289,7 +289,7 @@ def handle_text_message(event):
             print("NOVID")
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ลองใหม่อีกครั้ง'),
+                TextSendMessage(text='ชัวร์เลย pronhub block ลองใหม่อีกสักพัก'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
@@ -350,7 +350,7 @@ def handle_text_message(event):
         )
 
 
-    elif text == 'quota':
+    elif text == 'Xmsquota':
         quota = line_bot_api.get_message_quota()
         line_bot_api.reply_message(
             event.reply_token, [
@@ -358,32 +358,32 @@ def handle_text_message(event):
                 TextSendMessage(text='value: ' + str(quota.value))
             ]
         )
-    elif text == 'quota_consumption':
+    elif text == 'quota_consumptionXms':
         quota_consumption = line_bot_api.get_message_quota_consumption()
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text='total usage: ' + str(quota_consumption.total_usage)),
             ]
         )
-    elif text == 'push':
+    elif text == 'Xmspush':
         line_bot_api.push_message(
             event.source.user_id, [
                 TextSendMessage(text='PUSH!'),
             ]
         )
-    elif text == 'multicast':
+    elif text == 'multicasXmst':
         line_bot_api.multicast(
             [event.source.user_id], [
                 TextSendMessage(text='THIS IS A MULTICAST MESSAGE'),
             ]
         )
-    elif text == 'broadcast':
+    elif text == 'Xmsbroadcast':
         line_bot_api.broadcast(
             [
                 TextSendMessage(text='THIS IS A BROADCAST MESSAGE'),
             ]
         )
-    elif text.startswith('broadcast '):  # broadcast 20190505
+    elif text.startswith('Xmsbroadcast '):  # broadcast 20190505
         date = text.split(' ')[1]
         print("Getting broadcast result: " + date)
         result = line_bot_api.get_message_delivery_broadcast(date)
@@ -407,7 +407,7 @@ def handle_text_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Bot can't leave from 1:1 chat"))
-    elif text == 'ximage':
+    elif text == 'ximagex':
         url = request.url_root + '/static/logo.png'
         app.logger.info("url=" + url)
         line_bot_api.reply_message(
@@ -447,6 +447,39 @@ def handle_text_message(event):
         template_message = TemplateSendMessage(
             alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
+    
+    elif re.search(r'agm', text.lower()):
+        urlX = requests.get("https://yed.moviefreex24.com/models")
+        text = urlX.text
+        datapX = json.loads(text)
+        countX = datapX['totalModels']
+        models = datapX['models']
+        # for thumb in datapX['images']:
+        #     picTitle = thumb['title']
+        #     picSrc = thumb['src']
+        #     picLink = thumb['link']
+        #     print("")
+        numx1 = random.randint(1,countX)
+        numx2 = random.randint(1,countX)
+        numx3 = random.randint(1,countX)
+        numx4 = random.randint(1,countX)
+        numx5 = random.randint(1,countX)
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url=models[numx1]['src'],
+                                action=PostbackAction(label = models[numx1]['rank']+" "+models[numx1]['name'][0:7] ,data = "username="+models[numx1]['username'])),
+            ImageCarouselColumn(image_url=models[numx2]['src'],
+                                action=PostbackAction(label = models[numx2]['rank']+" "+models[numx2]['name'][0:7] ,data = "username="+models[numx2]['username'])),
+            ImageCarouselColumn(image_url=models[numx3]['src'],
+                                action=PostbackAction(label = models[numx3]['rank']+" "+models[numx3]['name'][0:7] ,data = "username="+models[numx3]['username'])),
+            ImageCarouselColumn(image_url=models[numx4]['src'],
+                                action=PostbackAction(label = models[numx4]['rank']+" "+models[numx4]['name'][0:7] ,data = "username="+models[numx4]['username'])),
+            ImageCarouselColumn(image_url=models[numx5]['src'],
+                                action=PostbackAction(label = models[numx5]['rank']+" "+models[numx5]['name'][0:7] ,data = "username="+models[numx5]['username']))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ดูAV LINEOA ฟรีไม่มีโฆษณา', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+
     elif text == 'ximage_carousel':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
@@ -461,6 +494,7 @@ def handle_text_message(event):
         template_message = TemplateSendMessage(
             alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
+    
     elif text == 'ximagemap':
         pass
     elif text == 'xflex':
@@ -763,9 +797,44 @@ def handle_text_message(event):
         else:
             messages = [TextSendMessage(text='available: false')]
         line_bot_api.reply_message(event.reply_token, messages)
+
+    elif re.search(r'help', text.lower()):
+        link_token_response = line_bot_api.issue_link_token(event.source.user_id)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text='''🌟 บอทLINEOA AVFREEX24.COM
+    - ใช้งานฟรี ไม่มีโฆษณา แอบแฟง
+    - สามารถ ดึงบอทไปใช้ในกลุ่มได้
+    - บอทเป็นบอทLINEOAไม่มีเตะยกห้อง
+    -------------------------------
+    🌟🌟 คำสั่งที่ใช้ได้ 🌟🌟
+    - ดูหนังAV มีเซ็นเซอร์
+      พิมพ์ avfreex24.com
+    - คลิปหลุดไทย
+      พิมพ์ clipthai
+    - หนังAVไม่เซ็นเซอร์
+      พิมพ์ movieav.net
+    - เรียกดูตารางบอลและดูบอลสด
+      พิมพ์ dob 
+      *กดAllowครั้งแรกที่เปิด*
+    ------------------------------- 
+    ** ค้นหาจาก pornhub
+    พิมพ์ ph=ตามด้วยข้อความ
+    ตัวอย่าง ph=เสียงไทย
+    -------------------------------
+    ** ดาวน์โหลดวีดีโอจาก TikTok ไมมีลายน้ำ ด้วยID
+    พิมพ์ lox=IDวีดีโอ
+    ตัวอย่าง lox=7078856042293103914
+    -------------------------------
+    ดูรูปจาก elitebabes วัยรุ่นเมกา
+    งานดี พิมพ์ agm
+    -------------------------------
+    ในส่วนอื่นๆกำลัง อัพเดทให้ครับ''')
+            ]
+        )
     else:
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="คำสั่งไม่ถูกต้อง\nดูหนังAV พิมพ์ avfreex24.com \nหรือดูคลิปหลุด\nพิมพ์ clipthai \nแนะนำให้จิ้มผ่าน เมนูสะดวกกว่า\nดูฟรี ไม่มีโฆษณา"))
+            event.reply_token, TextSendMessage(text="คำสั่งไม่ถูกต้อง\nดูหนังAV พิมพ์ avfreex24.com \nหรือดูคลิปหลุด\nพิมพ์ clipthai \n ดูคำสั่งที่ใช้ได้ พิมพ์ help \n แนะนำให้จิ้มผ่าน เมนูสะดวกกว่า\nดูฟรี ไม่มีโฆษณา"))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
@@ -872,7 +941,147 @@ def handle_postback(event):
     elif event.postback.data == 'date_postback':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.postback.params['date']))
+    elif event.postback.data.startswith('username'):
+        modelUser = event.postback.data
+        urlXM = requests.get("https://yed.moviefreex24.com/model?"+modelUser)
+        text = urlXM.text
+        datapX = json.loads(text)
+        name_m = datapX['name']
+        desc1_m = trans(datapX['desc1'])
+        poster_m = datapX['poster']
+        totalImages_m = datapX['totalImages']
+        # for imgx in datapX['images']:
+        #     src_m = imgx['src']
+        #     title_m = imgx['title']
+        #print(str(totalImages_m))
+        
+        bubble = BubbleContainer(
+            size = "giga",
+            direction='ltr',
+            hero=ImageComponent(
+                url = poster_m,
+                size='full',
+                aspect_ratio='1:1',
+                aspect_mode='fit',
+                #action=URIAction(uri='http://example.com', label='label')
+            ),
+            body=BoxComponent(
+                layout='vertical',
+                contents=[
+                    # title
+                    TextComponent(text = " "+name_m , weight='bold', size='xl'),
+                    # review
+                    BoxComponent(
+                        layout='baseline',
+                        margin='md',
+                        contents=[
+                            # IconComponent(size='sm', url='https://example.com/gold_star.png'),
+                            # IconComponent(size='sm', url='https://example.com/grey_star.png'),
+                            # IconComponent(size='sm', url='https://example.com/gold_star.png'),
+                            # IconComponent(size='sm', url='https://example.com/gold_star.png'),
+                            # IconComponent(size='sm', url='https://example.com/grey_star.png'),
+                            TextComponent(text='🌟🌟🌟🌟🌟 5.0', size='sm', color='#999999', margin='md', flex=0)
+                        ]
+                    ),
+                    # info
+                    BoxComponent(
+                        layout='vertical',
+                        margin='lg',
+                        spacing='sm',
+                        contents=[
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text = "รูปภาพทั้งหมด:",
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text=" "+str(totalImages_m) + " รูป",
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5
+                                    )
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='Description:',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text=" "+desc1_m,
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5,
+                                    ),
+                                ],
+                            ),
+                        ],
+                    )
+                ],
+            ),
+            footer=BoxComponent(
+                layout='vertical',
+                spacing='sm',
+                contents=[
+                    # callAction
+                    ButtonComponent(
+                        style='link',
+                        height='sm',
+                        action=PostbackAction(label='ดู 5 รูป', data='modelget=5&'+modelUser),
+                    ),
+                    # separator
+                    SeparatorComponent(),
+                    # websiteAction
+                    ButtonComponent(
+                        style='link',
+                        height='sm',
+                        #action=PostbackAction(label='ดูรูปทั้งหมด', data='modelget=ALL&'+modelUser)
+                        action= MessageAction(label='ดูรูปทั้งหมด', text='ยังบ่พร้อม')
+                    )
+                ]
+            ),
+        )
+        message = FlexSendMessage(alt_text="PNCKDEVAPP", contents=bubble)
+        line_bot_api.reply_message(
+            event.reply_token,
+            message
+        )
+        #print(name_m,desc1_m,totalImages_m)
 
+        #line_bot_api.reply_message(
+            #event.reply_token, TextSendMessage(text=event.postback.params['date'])
+        #    )
+    # elif event.postback.data.startswith('modelget'):
+    #     valueImg = event.postback.data.split('modelget=')[1]
+    #     userModel = valueImg.split('&')[1]
+    #     urlXM = requests.get("https://yed.moviefreex24.com/model?"+userModel)
+    #     text = urlXM.text
+    #     datapX = json.loads(text)
+    #     totalImages_m = datapX['totalImages']
+    #     for imgx in datapX['images']:
+    #         src_m = imgx['src']
+    #         title_m = imgx['title']
+
+    #     if valueImg == '5':
+    #         line_bot_api.reply_message(
+    #         event.reply_token,
+    #         ImageSendMessage(url, url)
+    #     )
+    #         line_bot_api.reply_message(
+    #         event.reply_token, TextSendMessage(text=event.postback.params['date'])
+    #         )
 
 @handler.add(BeaconEvent)
 def handle_beacon(event):
