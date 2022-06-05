@@ -28,7 +28,7 @@ from bs4 import BeautifulSoup
 from pornhub_api import PornhubApi
 api = PornhubApi()
 api.stars.all()
-#from pyngrok import ngrok
+from pyngrok import ngrok
 
 #ngrok.set_auth_token("29v8FNXJGbnKw3ujusg71Zu2ciX_4K4YJYzSDSJxFWxc37oos")
 
@@ -183,7 +183,7 @@ def handle_text_message(event):
         #client.sendFlexVideo(msg.to,vpath)
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='AVFREEX24นำเสนอ: \n' + x_vod_name +"\n"+x_vod_name_Th+"\nประเภท: "+x_type_name_Th),
+                TextSendMessage(text="AVFREEX24นำเสนอ: \n"+x_vod_name_Th+"\nประเภท: "+x_type_name_Th),
                 #TextSendMessage(text='value: ' + str(quota.value)),
                 VideoSendMessage(
                     original_content_url=vpath,
@@ -249,7 +249,7 @@ def handle_text_message(event):
 
     elif re.search(r'กำลังไปเอาหนังมาให้ดูใจเย็นๆ', text.lower()) or re.search(r'movieav\.net', text.lower()):
         #label = "JAV"
-        data = api.search.search("model+media", period="weekly")
+        data = api.search.search("model+media", period="monthly")
         pornlist = []
         for vid in data.videos:
             pornlist.append(vid.video_id)
@@ -266,7 +266,7 @@ def handle_text_message(event):
             print(fullHD,thumb)
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='JAV สวย ไม่เซ็นเซอร์ HD\nต้องการค้นหา พิมพ์\nph=ข้อความ\nตัวอย่าง ph=เสียงไทย'),
+                TextSendMessage(text='💘 หนังJAV สวย ไม่เซ็นเซอร์ HD \nจากค่าย ModelMedia ค่ายนี้ของดีเนียนใสกริ๊ป\nหากต้องการค้นหาเอง พิมพ์\nph=ข้อความ\nตัวอย่าง ph=asian'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
                 VideoSendMessage(
                     original_content_url=fullHD,
@@ -278,7 +278,7 @@ def handle_text_message(event):
             print(phone,thumb)
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='JAV สวย ไม่เซ็นเซอร์\nต้องการค้นหา พิมพ์\nph=ข้อความ\nตัวอย่าง ph=เสียงไทย'),
+                TextSendMessage(text='💘 หนังJAV สวย ไม่เซ็นเซอร์ HD \nจากค่าย ModelMedia ค่ายนี้ของดีเนียนใสกริ๊ป\nหากต้องการค้นหาเอง พิมพ์\nph=ข้อความ\nตัวอย่าง ph=asian'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
                 VideoSendMessage(
                     original_content_url=phone,
@@ -290,7 +290,7 @@ def handle_text_message(event):
             print("NOVID")
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ชัวร์เลย pronhub block ลองใหม่อีกสักพัก'),
+                TextSendMessage(text='🚀ชัวร์เลย pronhub block ลองใหม่อีกสักพัก \n หรือค้นหาจากSpankbang \nพิมพ์ sp=ข้อความที่จะค้นหา แนะนำให้ใช้เป็นภาษา อังกฤษ คับ ❤️'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
@@ -300,7 +300,7 @@ def handle_text_message(event):
         if msgTU == "":
             return line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ไม่พบ ข้อความที่จะค้นหาหนัง'),
+                TextSendMessage(text='❌ คำสั่งไม่ถูกต้องครับลูกพี่ ❌ \n❤️ ตัวอย่างคำสั่ง ค้นหาจากSpankbang \n sp=ข้อความที่จะค้นหา แนะนำให้ใช้เป็นภาษา อังกฤษ คับ ❤️'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
@@ -346,7 +346,7 @@ def handle_text_message(event):
         if playMP4[-1] != "":
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ผลการค้นหาจากSpankbang\nวีดีโอMP4 Title:\n'+SExsa['SPTitle']),
+                TextSendMessage(text='🎀 ผลการค้นหาจากSpankbang\nTitle:\n'+SExsa['SPTitle']),
                 #TextSendMessage(text='value: ' + str(quota.value)),
                 VideoSendMessage(
                     original_content_url=playMP4[-1],
@@ -358,7 +358,7 @@ def handle_text_message(event):
             print("NOVID")
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ไม่พบ หนังเย็ดกันครับ'),
+                TextSendMessage(text='🔥ค้นหาจาก Spankbang ไม่พบคลิป ที่มีข้อความตรงกับที่ต้องการ \nแนะนำให้ใช้เป็นภาษา อังกฤษ นะคับ'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
@@ -368,11 +368,11 @@ def handle_text_message(event):
         if msgTU == "":
             return line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ไม่พบ ข้อความที่จะค้นหาหนัง'),
+                TextSendMessage(text='❌ คำสั่งไม่ถูกต้องครับลูกพี่ ❌ \n❤️ ตัวอย่างคำสั่ง ค้นหาจากPornhub \n ph=ข้อความที่จะค้นหา แนะนำให้ใช้เป็นภาษา อังกฤษ คับ ❤️'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
-        data = api.search.search(msgTU, period="weekly")
+        data = api.search.search(msgTU, period="monthly")
         pornlist = []
         for vid in data.videos:
             pornlist.append(vid.video_id)
@@ -389,7 +389,7 @@ def handle_text_message(event):
             print(fullHD,thumb)
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='JAV สวย ไม่เซ็นเซอร์ HD\nดาวน์โหลดวีดีโอ TIKTOK ไม่มีลายน้ำ พิมพ์\nlox=IDวีดีโอ\nตัวอย่าง lox=7080324825415159082'),
+                TextSendMessage(text='🔎 ค้นหาจาก Pornhub \nเงื่อนไขในการค้น: คลิปมาใหม่ภายใน1เดือน \n💡 ฟังก์ชั่นแนะนำ: \n🎞️ ดาวน์โหลดวีดีโอ TIKTOK ไม่มีลายน้ำ พิมพ์ \nlox=IDวีดีโอ\n 🪄 ตัวอย่าง lox=7080324825415159082'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
                 VideoSendMessage(
                     original_content_url=fullHD,
@@ -401,7 +401,7 @@ def handle_text_message(event):
             print(phone,thumb)
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='JAV สวย ไม่เซ็นเซอร์\nดาวน์โหลดวีดีโอ TIKTOK ไม่มีลายน้ำ พิมพ์\nlox=IDวีดีโอ\nตัวอย่าง lox=7080324825415159082'),
+                TextSendMessage(text='🔎 ค้นหาจาก Pornhub \nเงื่อนไขในการค้น: คลิปมาใหม่ภายใน1เดือน \n💡 ฟังก์ชั่นแนะนำ: \n🎞️ ดาวน์โหลดวีดีโอ TIKTOK ไม่มีลายน้ำ พิมพ์ \nlox=IDวีดีโอ\n 🪄 ตัวอย่าง lox=7080324825415159082'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
                 VideoSendMessage(
                     original_content_url=phone,
@@ -413,7 +413,7 @@ def handle_text_message(event):
             print("NOVID")
             line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='ไม่พบ หนังเย็ดกันครับ'),
+                TextSendMessage(text='🔥ค้นหาจากPornhub ไม่พบคลิป ที่มีข้อความตรงกับที่ต้องการ \nแนะนำให้ใช้เป็นภาษา อังกฤษ นะคับ'),
                 #TextSendMessage(text='value: ' + str(quota.value)),
             ]
         )
@@ -462,19 +462,19 @@ def handle_text_message(event):
                 TextSendMessage(text='success: ' + str(result.success)),
             ]
         )
-    elif text == 'bye':
+    elif text == 'Xbye':
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text='Leaving group'))
+                event.reply_token, TextSendMessage(text='ออกจากกลุ่ม'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
             line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text='Leaving group'))
+                event.reply_token, TextSendMessage(text='ออกจากกลุ่ม'))
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Bot can't leave from 1:1 chat"))
+                TextSendMessage(text="บอทไม่สามารถออกจากการแชท 1:1ได้"))
     elif text == 'ximagex':
         url = request.url_root + '/static/logo.png'
         app.logger.info("url=" + url)
@@ -548,7 +548,7 @@ def handle_text_message(event):
             alt_text='ดูAV LINEOA ฟรีไม่มีโฆษณา', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
 
-    elif text == 'ximage_carousel':
+    elif re.search(r'^dooball$', text.lower()):
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=DatetimePickerAction(label='datetime',
@@ -563,9 +563,9 @@ def handle_text_message(event):
             alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     
-    elif text == 'ximagemap':
+    elif text == 'ximagesmap':
         pass
-    elif text == 'xflex':
+    elif text == 'xaflex':
         bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
@@ -799,32 +799,38 @@ def handle_text_message(event):
             event.reply_token,
             message
         )
-    elif text == 'xquick_reply':
+    elif re.search(r'^คำสั่ง$', text.lower()) or re.search(r'help', text.lower()):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
-                text='Quick reply',
+                text='AVFREEX24 LINEOAเลือกคำสั่งได้เลยคับ \nเมื่อเลือกแล้วรอสักครู่ ..ใจเย็ดๆคับ',
                 quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
-                            action=PostbackAction(label="label1", data="data1")
+                            action=PostbackAction(label="ดูหนังAV", data="PB_JAV",text="เลือก หนังAV \nกรุณารอแปปนะคับ")
                         ),
                         QuickReplyButton(
-                            action=MessageAction(label="label2", text="text2")
+                            action=MessageAction(label="คลิปหลุดไทย",text="เลือก คลิปหลุดไทย clipthai \nกรุณารอแปปนะคับ")
                         ),
                         QuickReplyButton(
-                            action=DatetimePickerAction(label="label3",
-                                                        data="data3",
-                                                        mode="date")
+                            action=MessageAction(label="ค้นหาPornhub",text="ตัวอย่างคำสั่งค้นหาจาก Pornhub \nพิมพ์ ph=ข้อความ \nง่ายๆแค่ปลายนิ้วและรอสักแปป")
                         ),
                         QuickReplyButton(
-                            action=CameraAction(label="label4")
+                            action=MessageAction(label="ค้นหาSpankbang",text="ตัวอย่างคำสั่งค้นหาจาก Spankbang \nพิมพ์ ph=ข้อความ \nง่ายๆแค่ปลายนิ้วและรอสักแปป")
+                            #action=CameraAction(label="label4")
                         ),
                         QuickReplyButton(
-                            action=CameraRollAction(label="label5")
+                            action=MessageAction(label="TikTok", text="🎞️ ดาวน์โหลดวีดีโอ TIKTOK ไม่มีลายน้ำ \nพิมพ์ lox=IDวีดีโอ\n 🪄 ตัวอย่าง lox=7080324825415159082")
+                            #action=CameraRollAction(label="label5")
                         ),
                         QuickReplyButton(
-                            action=LocationAction(label="label6")
+                            action=MessageAction(label="Euro Girl",text="คลังแกลอรี่ Euro Girl \n agm สวยงามคับผม")
+                            #action=LocationAction(label="label6")
+                        ),
+                        QuickReplyButton(
+                            #action=MessageAction(label="ดูบอลสด",text="dooball สดฟรีไม่มีโฆษณา พร้อมตารางบอล อัพเดทกับกรรมการFIFA")
+                            action=URIAction(label='ดูบอลสด', uri="https://liff.line.me/1657175016-y3oO8Okv")
+                            #action=LocationAction(label="label6")
                         ),
                     ])))
     elif text == 'xlink_token' and isinstance(event.source, SourceUser):
@@ -866,47 +872,51 @@ def handle_text_message(event):
             messages = [TextSendMessage(text='available: false')]
         line_bot_api.reply_message(event.reply_token, messages)
 
-    elif re.search(r'help', text.lower()):
-        link_token_response = line_bot_api.issue_link_token(event.source.user_id)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text='''🌟 บอทLINEOA AVFREEX24.COM
-    - ใช้งานฟรี ไม่มีโฆษณา แอบแฟง
-    - สามารถ ดึงบอทไปใช้ในกลุ่มได้
-    - บอทเป็นบอทLINEOAไม่มีเตะยกห้อง
-    -------------------------------
-    🌟🌟 คำสั่งที่ใช้ได้ 🌟🌟
-    - ดูหนังAV มีเซ็นเซอร์
-      พิมพ์ avfreex24.com
-    - คลิปหลุดไทย
-      พิมพ์ clipthai
-    - หนังAVไม่เซ็นเซอร์
-      พิมพ์ movieav.net
-    - เรียกดูตารางบอลและดูบอลสด
-      พิมพ์ dob 
-      *กดAllowครั้งแรกที่เปิด*
-    ------------------------------- 
-    ** ค้นหาจาก pornhub
-    พิมพ์ ph=ตามด้วยข้อความ
-    ตัวอย่าง ph=เสียงไทย
-    -------------------------------
-    ** ค้นหาจาก spankbang
-    พิมพ์ sp=ตามด้วยข้อความ
-    ตัวอย่าง sp=modelmedia
-    -------------------------------
-    ** ดาวน์โหลดวีดีโอจาก TikTok ไมมีลายน้ำ ด้วยID
-    พิมพ์ lox=IDวีดีโอ
-    ตัวอย่าง lox=7078856042293103914
-    -------------------------------
-    ดูรูปจาก elitebabes วัยรุ่นเมกา
-    งานดี พิมพ์ agm
-    -------------------------------
-    ในส่วนอื่นๆกำลัง อัพเดทให้ครับ''')
-            ]
-        )
+    # elif re.search(r'help', text.lower()):
+    #     link_token_response = line_bot_api.issue_link_token(event.source.user_id)
+    #     line_bot_api.reply_message(
+    #         event.reply_token, [
+    #             TextSendMessage(text='''🌟 บอทLINEOA AVFREEX24.COM
+    # - ใช้งานฟรี ไม่มีโฆษณา แอบแฟง
+    # - สามารถ ดึงบอทไปใช้ในกลุ่มได้
+    # - บอทLINEOAไม่มีเตะยกห้อง
+    # -------------------------------
+    # 🌟🌟 พิมพ์ คำสั่ง 🌟🌟
+    # เพื่อเรียกดูเมนูใช้ในกลุ่มได้
+    # -------------------------------
+    # 🌟🌟 คำสั่งที่ใช้ได้ 🌟🌟
+    # - ดูหนังAV มีเซ็นเซอร์
+    #   พิมพ์ avfreex24.com
+    # - คลิปหลุดไทย
+    #   พิมพ์ clipthai
+    # - หนังAVไม่เซ็นเซอร์
+    #   พิมพ์ movieav.net
+    # - เรียกดูตารางบอลและดูบอลสด
+    #   พิมพ์ dooball 
+    #   *กดAllowครั้งแรกที่เปิด*
+    # ------------------------------- 
+    # ** ค้นหาจาก pornhub
+    # พิมพ์ ph=ตามด้วยข้อความ
+    # ตัวอย่าง ph=เสียงไทย
+    # -------------------------------
+    # ** ค้นหาจาก spankbang
+    # พิมพ์ sp=ตามด้วยข้อความ
+    # ตัวอย่าง sp=modelmedia
+    # -------------------------------
+    # ** ดาวน์โหลดวีดีโอจาก TikTok ไมมีลายน้ำ ด้วยID
+    # พิมพ์ lox=IDวีดีโอ
+    # ตัวอย่าง lox=7078856042293103914
+    # -------------------------------
+    # ดูรูปจาก elitebabes วัยรุ่นเมกา
+    # งานดี พิมพ์ agm
+    # -------------------------------
+    # ในส่วนอื่นๆกำลัง อัพเดทให้ครับ''')
+    #         ]
+    #     )
     else:
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="คำสั่งไม่ถูกต้อง\nดูหนังAV พิมพ์ avfreex24.com \nหรือดูคลิปหลุด\nพิมพ์ clipthai \n ดูคำสั่งที่ใช้ได้ พิมพ์ help \n แนะนำให้จิ้มผ่าน เมนูสะดวกกว่า\nดูฟรี ไม่มีโฆษณา"))
+        print("outtext")
+        #line_bot_api.reply_message(
+        #    event.reply_token, TextSendMessage(text="คำสั่งไม่ถูกต้อง\nดูหนังAV พิมพ์ avfreex24.com \nหรือดูคลิปหลุด\nพิมพ์ clipthai \n ดูคำสั่งที่ใช้ได้ พิมพ์ help \n แนะนำให้จิ้มผ่าน เมนูสะดวกกว่า\nดูฟรี ไม่มีโฆษณา"))
 
 
 @handler.add(MessageEvent, message=LocationMessage)
@@ -931,58 +941,58 @@ def handle_sticker_message(event):
 
 
 # Other Message Type
-@handler.add(MessageEvent, message=(ImageMessage, VideoMessage, AudioMessage))
-def handle_content_message(event):
-    if isinstance(event.message, ImageMessage):
-        ext = 'jpg'
-    elif isinstance(event.message, VideoMessage):
-        ext = 'mp4'
-    elif isinstance(event.message, AudioMessage):
-        ext = 'm4a'
-    else:
-        return
+# @handler.add(MessageEvent, message=(ImageMessage, VideoMessage, AudioMessage))
+# def handle_content_message(event):
+#     if isinstance(event.message, ImageMessage):
+#         ext = 'jpg'
+#     elif isinstance(event.message, VideoMessage):
+#         ext = 'mp4'
+#     elif isinstance(event.message, AudioMessage):
+#         ext = 'm4a'
+#     else:
+#         return
 
-    message_content = line_bot_api.get_message_content(event.message.id)
-    with tempfile.NamedTemporaryFile(dir=static_tmp_path, prefix=ext + '-', delete=False) as tf:
-        for chunk in message_content.iter_content():
-            tf.write(chunk)
-        tempfile_path = tf.name
+#     message_content = line_bot_api.get_message_content(event.message.id)
+#     with tempfile.NamedTemporaryFile(dir=static_tmp_path, prefix=ext + '-', delete=False) as tf:
+#         for chunk in message_content.iter_content():
+#             tf.write(chunk)
+#         tempfile_path = tf.name
 
-    dist_path = tempfile_path + '.' + ext
-    dist_name = os.path.basename(dist_path)
-    os.rename(tempfile_path, dist_path)
+#     dist_path = tempfile_path + '.' + ext
+#     dist_name = os.path.basename(dist_path)
+#     os.rename(tempfile_path, dist_path)
 
-    line_bot_api.reply_message(
-        event.reply_token, [
-            TextSendMessage(text='Save content.'),
-            TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
-        ])
+#     line_bot_api.reply_message(
+#         event.reply_token, [
+#             TextSendMessage(text='Save content.'),
+#             TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
+#         ])
 
 
-@handler.add(MessageEvent, message=FileMessage)
-def handle_file_message(event):
-    message_content = line_bot_api.get_message_content(event.message.id)
-    with tempfile.NamedTemporaryFile(dir=static_tmp_path, prefix='file-', delete=False) as tf:
-        for chunk in message_content.iter_content():
-            tf.write(chunk)
-        tempfile_path = tf.name
+# @handler.add(MessageEvent, message=FileMessage)
+# def handle_file_message(event):
+#     message_content = line_bot_api.get_message_content(event.message.id)
+#     with tempfile.NamedTemporaryFile(dir=static_tmp_path, prefix='file-', delete=False) as tf:
+#         for chunk in message_content.iter_content():
+#             tf.write(chunk)
+#         tempfile_path = tf.name
 
-    dist_path = tempfile_path + '-' + event.message.file_name
-    dist_name = os.path.basename(dist_path)
-    os.rename(tempfile_path, dist_path)
+#     dist_path = tempfile_path + '-' + event.message.file_name
+#     dist_name = os.path.basename(dist_path)
+#     os.rename(tempfile_path, dist_path)
 
-    line_bot_api.reply_message(
-        event.reply_token, [
-            TextSendMessage(text='Save file.'),
-            TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
-        ])
+#     line_bot_api.reply_message(
+#         event.reply_token, [
+#             TextSendMessage(text='Save file.'),
+#             TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
+#         ])
 
 
 @handler.add(FollowEvent)
 def handle_follow(event):
     app.logger.info("Got Follow event:" + event.source.user_id)
     line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text='Got follow event'))
+        event.reply_token, TextSendMessage(text='พิมพ์ คำสั่ง หรือ help หรือง่ายๆกดที่ริชเมนูคับ'))
 
 
 @handler.add(UnfollowEvent)
@@ -994,12 +1004,12 @@ def handle_unfollow(event):
 def handle_join(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='Joined this ' + event.source.type))
+        TextSendMessage(text='เข้าร่วมกลุ่ม ' + event.source.type))
 
 
 @handler.add(LeaveEvent)
 def handle_leave():
-    app.logger.info("Got leave event")
+    app.logger.info("ออกจากกลุ่ม")
 
 
 @handler.add(PostbackEvent)
@@ -1013,6 +1023,59 @@ def handle_postback(event):
     elif event.postback.data == 'date_postback':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.postback.params['date']))
+    elif event.postback.data == 'PB_JAV':
+        APIAV = ["https://mgzyz1.com/api.php/provide/vod/?ac=detail&pg="+str(random.randint(1,1000)),"https://apilj.com/api.php/provide/vod/at/json/?ac=detail&pg="+str(random.randint(1,1000))]
+        url = requests.get(random.choice(APIAV))
+        text = url.text
+        data = json.loads(text)
+        avdata = data['list'][random.randint(1,19)]
+        # x_vod_id = str(avdata['vod_id'])
+        x_vod_pic = avdata['vod_pic']
+        if x_vod_pic.startswith("http://"):
+            x_vod_pic = x_vod_pic.replace("http://", "https://")
+        x_vod_name_Th = trans(avdata['vod_name'])
+        x_vod_name = avdata['vod_name']
+        x_type_name_Th = trans(avdata['type_name'])
+        # x_vod_score = str(avdata['vod_score'])
+        vpath = url_match(avdata['vod_play_url'])
+        #flexJav={"type": "bubble", "size": "kilo", "body":{"type": "box", "layout": "vertical", "contents": [{"type": "video", "url": vpath, "previewUrl": vpath, "altContent":{"type": "image", "size": "full", "aspectRatio": "1:1", "aspectMode": "cover", "url": x_vod_pic}},{"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": "AVFREEX24.COM", "size": "xxs", "color": "#ff0000"}], "position": "absolute", "borderWidth": "1px", "borderColor": "#ff0000", "paddingStart": "5px", "paddingEnd": "5px", "paddingTop": "1px", "paddingBottom": "1px", "cornerRadius": "5px", "offsetTop": "5px", "offsetStart": "5px", "backgroundColor": "#00000011"},{"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": x_vod_name_Th , "weight": "bold", "wrap": True, "color": "#ffffffcc"},{"type": "text", "text": x_type_name_Th, "wrap": True, "size": "xxs", "margin": "sm", "color": "#ffffffcc"}], "paddingTop": "5px", "paddingEnd": "10px", "paddingStart": "10px"}], "paddingAll": "0px", "paddingBottom": "13px", "backgroundColor": "#000000"}}
+        #print(flexJav)
+        #client.sendFlexVideo(msg.to,vpath)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="AVFREEX24นำเสนอ: \n"+x_vod_name_Th+"\nประเภท: "+x_type_name_Th),
+                #TextSendMessage(text='value: ' + str(quota.value)),
+                VideoSendMessage(
+                    original_content_url=vpath,
+                    preview_image_url=x_vod_pic
+                )
+            ]
+        )
+        #line_bot_api.reply_message(
+        #    event.reply_token, TextSendMessage(text=""))
+    # elif event.postback.data == 'PB_TH':
+    #     url = requests.get(f"https://ru-4569f-default-rtdb.asia-southeast1.firebasedatabase.app/GO"+str(random.randint(1,7))+"/"+str(random.randint(1,120))+".json")
+    #     #APIAV = ["https://mgzyz1.com/api.php/provide/vod/?ac=detail&pg="+str(random.randint(1,100)),"https://apilj.com/api.php/provide/vod/at/json/?ac=detail&pg="+str(random.randint(1,100))]
+    #     #url = requests.get(random.choice(APIAV))
+    #     text = url.text
+    #     data = json.loads(text)
+    #     #avdata = data['list'][random.randint(1,19)]
+    #     x_vod_pic = data['splash']
+    #     x_vod_name = data['splashtext'].replace(".mp4", "")
+    #     x_vod_src = data['src']
+    #     #flexJav={"type": "bubble", "size": "kilo", "body":{"type": "box", "layout": "vertical", "contents": [{"type": "video", "url": vpath, "previewUrl": vpath, "altContent":{"type": "image", "size": "full", "aspectRatio": "1:1", "aspectMode": "cover", "url": x_vod_pic}},{"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": "AVFREEX24.COM", "size": "xxs", "color": "#ff0000"}], "position": "absolute", "borderWidth": "1px", "borderColor": "#ff0000", "paddingStart": "5px", "paddingEnd": "5px", "paddingTop": "1px", "paddingBottom": "1px", "cornerRadius": "5px", "offsetTop": "5px", "offsetStart": "5px", "backgroundColor": "#00000011"},{"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": x_vod_name_Th , "weight": "bold", "wrap": True, "color": "#ffffffcc"},{"type": "text", "text": x_type_name_Th, "wrap": True, "size": "xxs", "margin": "sm", "color": "#ffffffcc"}], "paddingTop": "5px", "paddingEnd": "10px", "paddingStart": "10px"}], "paddingAll": "0px", "paddingBottom": "13px", "backgroundColor": "#000000"}}
+    #     #print(flexJav)
+    #     #client.sendFlexVideo(msg.to,vpath)
+    #     line_bot_api.reply_message(
+    #         event.reply_token, [
+    #             TextSendMessage(text='CLIP.AVFREEX24 นำเสนอ: \n' + x_vod_name),
+    #             #TextSendMessage(text='value: ' + str(quota.value)),
+    #             VideoSendMessage(
+    #                 original_content_url=x_vod_src,
+    #                 preview_image_url=x_vod_pic
+    #             )
+    #         ]
+    #     )
     elif event.postback.data.startswith('username'):
         modelUser = event.postback.data
         urlXM = requests.get("https://yed.moviefreex24.com/model?"+modelUser)
@@ -1111,17 +1174,18 @@ def handle_postback(event):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=PostbackAction(label='ดู 5 รูป', data='modelget=5&'+modelUser),
+                        action=URIAction(uri='https://liff.line.me/1657175016-J0mekepP?'+modelUser.split('=')[1], label='ดูรูปทั้งหมด')
+                        #action=PostbackAction(label='ดู 5 รูป', data='modelget=5&'+modelUser),
                     ),
                     # separator
-                    SeparatorComponent(),
+                    # SeparatorComponent(),
                     # websiteAction
-                    ButtonComponent(
-                        style='link',
-                        height='sm',
-                        #action=PostbackAction(label='ดูรูปทั้งหมด', data='modelget=ALL&'+modelUser)
-                        action= MessageAction(label='ดูรูปทั้งหมด', text='ยังบ่พร้อม')
-                    )
+                    #ButtonComponent(
+                    ##    style='link',
+                    #    height='sm',
+                    #    #action=PostbackAction(label='ดูรูปทั้งหมด', data='https://liff.line.me/1657175016-J0mekepP?model'+modelUser)
+                    #    action= MessageAction(label='ดูรูปทั้งหมด', text='ยังบ่พร้อม')
+                    #)
                 ]
             ),
         )
